@@ -68,10 +68,6 @@ p {
   }
 }
 
-#stopwatch-button {
-  display: flex;
-}
-
 /* forms */
 
 input {
@@ -97,5 +93,22 @@ input {
   @extend .has-error;
   .form-control {
     color: $state-danger-text;
+  }
+}
+
+/* stopwatch */
+
+#clock {
+  text-align: center;
+  span {
+    font-size: 80px;
+  }
+}
+
+#stopwatch-button {
+  display: flex;
+  margin: 30px;
+  input {
+    outline: none;
   }
 }

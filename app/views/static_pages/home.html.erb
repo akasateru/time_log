@@ -1,12 +1,12 @@
 <% if logged_in? %>
   <div class="container">
-    <h1>ログイン後</h1>
-    <span>
-    <div class="row">
+    <h1>StopWatch</h1>
+    <div class="row" id="clock">
+      <span>00:00:00</span>
       <div class="col-md" id="stopwatch-button">
-        <input type="button" class="btn btn-outline-primary" id="start" value="Start">
-        <input type="button" class="btn btn-outline-secondary" id="stop" value="Stop">
-        <input type="button" class="btn btn-outline-secondary" id="reset" value="Reset">
+        <input type="button" class="btn btn-primary" id="start" value="Start">
+        <input type="button" class="btn btn-danger" id="stop" value="Stop">
+        <input type="button" class="btn btn-success" id="reset" value="Reset">
       </div>
     </div>
   </div>
