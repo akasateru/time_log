@@ -2,14 +2,57 @@
   <div class="container">
     <h1>StopWatch</h1>
     <div class="row" id="clock">
-      <span>00:00:00</span>
+      <span id="time">00:00:00</span>
       <div class="col-md" id="stopwatch-button">
-        <input type="button" class="btn btn-primary" id="start" value="Start">
-        <input type="button" class="btn btn-danger" id="stop" value="Stop">
-        <input type="button" class="btn btn-success" id="reset" value="Reset">
+        <input type="button" class="btn btn-primary" id="StartStop" value="スタート" onclick="StartStopTimer()">
+        <input type="button" class="btn btn-success" id="Reset" value="リセット" onclick="ResetTimer()">
       </div>
     </div>
   </div>
+  <script>
+    timer=0;
+    judge=0;
+    time = document.getElementById('time');
+    startstop = document.getElementById("StartStop");
+    reset = document.getElementById("Reset");
+
+    function display_time(timer){
+      hour = Math.floor(timer/3600);
+      min = Math.floor((timer%3600)/60);
+      sec = (timer%3600)%60;
+      if (hour<10){hour="0"+hour};
+      if (min<10){min="0"+min};
+      if (sec<10){sec="0"+sec};
+      return hour+":"+min+":"+sec;
+    }
+
+    function counter(){
+      timer++;
+      time.innerHTML = display_time(timer);
+    }
+
+    function StartStopTimer(){
+      if (judge==0){
+        intervalID = setInterval(counter,1000);
+        startstop.value = "ストップ";
+        judge=1;
+        reset.disabled = true;
+      }
+      else{
+        clearInterval(intervalID);
+        startstop.value = "スタート";
+        judge=0;
+        reset.disabled = false;
+      }
+    }
+
+    function ResetTimer(){
+      timer = 0;
+      judge = 0;
+      time.innerHTML = "00:00:00";
+      console.log
+    }
+  </script>
 <% else %>
   <div class="center jumbotron">
     <h1>ようこそ！</h1>
