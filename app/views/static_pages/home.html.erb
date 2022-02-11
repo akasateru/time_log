@@ -2,10 +2,18 @@
   <div class="container">
     <h1>StopWatch</h1>
     <div class="row" id="clock">
-      <span id="time">00:00:00</span>
-      <div class="col-md" id="stopwatch-button">
+      <span class="col-md-12" id="time">00:00:00</span>
+      <div class="col-md-6 col-md-offset-3" id="stopwatch-button">
         <input type="button" class="btn btn-primary" id="StartStop" value="スタート" onclick="StartStopTimer()">
         <input type="button" class="btn btn-success" id="Reset" value="リセット" onclick="ResetTimer()">
+      </div>
+      <div class='col-md-6 col-md-offset-3'>
+        <%= form_with(model: @time_record, local: true) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <%= f.label :time %>
+          <%= f.text_field :time, value: "00:00:00", id: :form_time, class:'form-control' %>
+          <%= f.submit "記録する" , class:"btn btn-info" %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -15,6 +23,7 @@
     time = document.getElementById('time');
     startstop = document.getElementById("StartStop");
     reset = document.getElementById("Reset");
+    form_time = document.getElementById("form_time");
 
     function display_time(timer){
       hour = Math.floor(timer/3600);
@@ -41,6 +50,7 @@
       else{
         clearInterval(intervalID);
         startstop.value = "スタート";
+        form_time.value = display_time(timer);
         judge=0;
         reset.disabled = false;
       }

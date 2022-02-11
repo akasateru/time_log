@@ -1,2 +1,15 @@
-<h1>name: <%= @user.name %></h1>
-<h1>email: <%= @user.email %><h1>
+<h1>ユーザ名: <%= @user.name %></h1>
+
+<% if @user.time_records.any? %>
+  <h1>yes</h1>
+  <ol class="time_records">
+    <%= @time_records.each do |time_record| %>
+      <li id="time_record-<%= time_record.id %>">
+        <span><%= time_record.time %></span>
+      </li>
+      <%= will_paginate @time_records %>
+    <% end %>
+  </ol>
+<% else %>
+  <h1>no history</h1>
+<% end %>

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
-    # @user = User.find(1)
     @user = User.find(params[:id])
+    @time_records = @user.time_records.paginate(page: params[:page])
   end
   
   def new
