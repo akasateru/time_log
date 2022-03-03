@@ -11,6 +11,6 @@ class TimeRecordsController < ApplicationController
 
   private
     def time_record_params
-      params.require(:time_record).permit(:time)
+      params.require(:time_record).permit(:time, :explanation, :createed_at)
     end
 end

@@ -1,15 +1,28 @@
-<h1>ユーザ名: <%= @user.name %></h1>
-
+<h1><%= @user.name %></h1>
 <% if @user.time_records.any? %>
-  <h1>yes</h1>
-  <ol class="time_records">
-    <%= @time_records.each do |time_record| %>
-      <li id="time_record-<%= time_record.id %>">
-        <span><%= time_record.time %></span>
+  <div>
+    <% @week.each do |week| %>
+      <%= week %>
+      <>
+    <% end %>
+  </div>
+  <ol class="time_records" style="font-size: 40px; list-style-type: none;">
+  <hr style="height: 10px; border-top: 4px solid;">
+    <% @time_records.each do |time_record| %>
+      <li id="time_record-<%= time_record.id %>" style="text-align: center;">
+        <%= time_record.created_at %>
+        <% output_time = time_record.time.split(":") %>
+        <% if output_time[0] == "00" %>
+          <span><%= output_time[1]+"min "+ output_time[2] + "sec." %></span>
+        <% else %>
+          <span><%= output_time[0]+"hour "+ output_time[1]+"min "+ output_time[2] + "sec." %></span>
+        <% end %>
+        <span><br><%= time_record.explanation %></span>
+        <hr style="height: 10px; border-top: 4px solid;">
       </li>
       <%= will_paginate @time_records %>
     <% end %>
   </ol>
 <% else %>
-  <h1>no history</h1>
+  <h1>記録がありません。</h1>
 <% end %>
