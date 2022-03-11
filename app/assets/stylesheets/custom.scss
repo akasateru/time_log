@@ -113,3 +113,23 @@ input {
     outline: none;
   }
 }
+
+/* calender */
+
+.calender {
+  display: grid;
+  font-size: 40px;
+}
+
+.box24 {
+  width:auto;
+  height:60px;
+  background-color:silver;
+  .box-each{
+    font-size: 1px;
+    margin-left:(12/24)*100%;
+    width:(5/24)*100%;
+    background-color:red;
+    height:60px;
+  }
+}

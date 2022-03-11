@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @time_records = @user.time_records.paginate(page: params[:page])
-    @week = ["日曜日","月","火","水","木","金","土"]
+    @week = ["日","月","火","水","木","金","土"]
+    
   end
   
   def new

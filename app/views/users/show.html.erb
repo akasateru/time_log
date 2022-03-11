@@ -1,28 +1,41 @@
 <h1><%= @user.name %></h1>
 <% if @user.time_records.any? %>
-  <div>
-    <% @week.each do |week| %>
-      <%= week %>
-      <>
+  <div class="calender">
+    <div class="row">
+      <div class="col-md-2"> </div>
+      <div class="col-md-10">
+        <div style="font-size:18px;text-align:center;margin-bottom:20px;">
+          <% li = [] %>
+          <% 25.times do |n| %>
+            <% li.push(n) %>
+            <% n+=1 %>
+          <% end %>
+          <%= li.join(" . ") %>
+        </div>
+      </div>
+    </div>
+    <% today = Time.now.to_a %>
+    <% last = @time_records[-1].created_at.to_a %>
+    <% dates = (Date.new(last[5], last[4], last[3])...Date.new(today[5], today[4], today[3]+1)).to_a %>
+    <% dates.reverse_each do |date| %>
+      <div class="row">
+        <div class="col-md-2", style="font-size:30px;"><%= date %></div>
+        <div class="col-md-10">
+          <div class="box24">
+            <%= date %>
+            <div class="box-each">
+              <% @time_records.each do |tr| %>
+                <%=  %>
+                <%= tr.created_at %>
+                <%= date %>
+              <% end %>
+            </div>
+          
+          </div>
+        </div>
+      </div>
     <% end %>
-  </div>
-  <ol class="time_records" style="font-size: 40px; list-style-type: none;">
-  <hr style="height: 10px; border-top: 4px solid;">
-    <% @time_records.each do |time_record| %>
-      <li id="time_record-<%= time_record.id %>" style="text-align: center;">
-        <%= time_record.created_at %>
-        <% output_time = time_record.time.split(":") %>
-        <% if output_time[0] == "00" %>
-          <span><%= output_time[1]+"min "+ output_time[2] + "sec." %></span>
-        <% else %>
-          <span><%= output_time[0]+"hour "+ output_time[1]+"min "+ output_time[2] + "sec." %></span>
-        <% end %>
-        <span><br><%= time_record.explanation %></span>
-        <hr style="height: 10px; border-top: 4px solid;">
-      </li>
-      <%= will_paginate @time_records %>
-    <% end %>
-  </ol>
+    <hr>
 <% else %>
   <h1>記録がありません。</h1>
 <% end %>
