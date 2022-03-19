@@ -1,25 +1,24 @@
 <h1><%= @user.name %></h1>
 <% if @user.time_records.any? %>
   <div class="calender">
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-10">
-        <div style="font-size:18px;text-align:center;margin-bottom:20px;">
-          <% li = [] %>
-          <% 25.times do |n| %>
-            <% li.push(n) %>
-            <% n+=1 %>
-          <% end %>
-          <%= li.join(" . ") %>
-        </div>
-      </div>
-    </div>
     <% today = Time.now.to_a %>
     <% last = @time_records[-1].created_at.to_a %>
     <% dates = (Date.new(last[5], last[4], last[3])...Date.new(today[5], today[4], today[3]+1)).to_a %>
+    <% i=0 %>
     <% dates.reverse_each do |date| %>
       <div class="row">
-        <div class="col-md-2", style="font-size:30px;"><%= date %></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-10">
+          <div style="position:relative;margin-bottom:20px;">
+            <% if i%7==0 %>
+              <% 25.times do |n| %>
+                <div class="time24" style='margin-left:calc(<%=n%>/24*99%);'><%= n %></div>
+              <% end %>
+            <% end %>
+            <% i+=1 %>
+          </div>
+        </div>
+        <div class="col-md-2", style="font-size:25px;"><%= date.to_s+" "+%w(日 月 火 水 木 金 土)[date.wday].to_s %></div>
         <div class="col-md-10">
           <div class="box24">
             <% 25.times do |n| %>
@@ -38,7 +37,6 @@
               <% end %>
             <% end %>
           </div>
-          <hr>
         </div>
       </div>
     <% end %>

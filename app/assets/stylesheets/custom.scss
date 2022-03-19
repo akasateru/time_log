@@ -122,19 +122,25 @@ input {
 }
 
 :root {
-  --start-time:calc(2/24*100%);
-  --take-time:calc(2/24*100%);
   --col:green;
+}
+
+.time24 {
+  font-size:18px;
+  position:absolute;
+  margin-bottom:20px;
 }
 
 .box24 {
   width:auto;
   height:60px;
   background-color:silver;
+  position:relative;
   .border{
     max-width: 100%;
     position:absolute;
-    border-left:1px solid black;
+    border-left:1px solid gray;
+    box-sizing: border-box;
     height:60px;
   }
   .box-each{
