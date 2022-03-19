@@ -121,15 +121,26 @@ input {
   font-size: 40px;
 }
 
+:root {
+  --start-time:calc(2/24*100%);
+  --take-time:calc(2/24*100%);
+  --col:green;
+}
+
 .box24 {
   width:auto;
   height:60px;
   background-color:silver;
+  .border{
+    max-width: 100%;
+    position:absolute;
+    border-left:1px solid black;
+    height:60px;
+  }
   .box-each{
-    font-size: 1px;
-    margin-left:(12/24)*100%;
-    width:(5/24)*100%;
-    background-color:red;
+    position: absolute;
+    font-size: 15px;
+    background-color:var(--col);
     height:60px;
   }
 }
