@@ -10,11 +10,12 @@
       <div class='col-md-6 col-md-offset-3'>
         <%= form_with(model: @time_record, local: true) do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
-          <%= f.label :time %>
+          <%= f.label :time, "時間" %>
           <%= f.text_field :time, value: "00:00:00", id: :form_time, class:'form-control' %>
-          <%= f.label :explanation, "説明" %>
-          <%= f.text_field :explanation, value: "その他", class:'form-control' %>
-          <%= f.submit "記録する" , class:"btn btn-info" %>
+          <%= f.label :explanation, "内容" %>
+          <%= f.select :explanation,[["勉強","blue"],["公用","orange"],["私用","yellow"],["睡眠","purple"],["その他","green"]],{include_blank: "選択して下さい"},{class: 'form-control'} %>
+          
+          <%= f.submit "記録" , class:"btn btn-info",style:"margin-top:30px;" %>
         <% end %>
       </div>
     </div>

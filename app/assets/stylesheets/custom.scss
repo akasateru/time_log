@@ -121,10 +121,6 @@ input {
   font-size: 40px;
 }
 
-:root {
-  --col:green;
-}
-
 .time24 {
   font-size:18px;
   position:absolute;
@@ -146,7 +142,7 @@ input {
   .box-each{
     position: absolute;
     font-size: 15px;
-    background-color:var(--col);
+    background-color:green;
     height:60px;
   }
 }

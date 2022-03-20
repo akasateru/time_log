@@ -1,11 +1,8 @@
 <h1><%= @user.name %></h1>
 <% if @user.time_records.any? %>
   <div class="calender">
-    <% today = Time.now.to_a %>
-    <% last = @time_records[-1].created_at.to_a %>
-    <% dates = (Date.new(last[5], last[4], last[3])...Date.new(today[5], today[4], today[3]+1)).to_a %>
     <% i=0 %>
-    <% dates.reverse_each do |date| %>
+    <% @dates.reverse_each do |date| %>
       <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-10">
@@ -18,7 +15,7 @@
             <% i+=1 %>
           </div>
         </div>
-        <div class="col-md-2", style="font-size:25px;"><%= date.to_s+" "+%w(日 月 火 水 木 金 土)[date.wday].to_s %></div>
+        <div class="col-md-2" style="font-size:25px;"><%= date.to_s+" "+%w(日 月 火 水 木 金 土)[date.wday].to_s %></div>
         <div class="col-md-10">
           <div class="box24">
             <% 25.times do |n| %>
@@ -26,12 +23,12 @@
             <% end %>
             <% @time_records.each do |tr| %>
               <% if tr.created_at.year==date.year and tr.created_at.month==date.month and tr.created_at.day==date.day %>
-                <% start_time = tr.created_at.hour + tr.created_at.min.to_f/60 %>
+                <% end_time = tr.created_at.hour + tr.created_at.min.to_f/60 %>
                 <% k = tr.time.split(":") %>
                 <% elapsed_time = k[0].to_i+k[1].to_f/60+k[2].to_f/3600 %>
-                <div class="box-each" style='margin-left:calc(<%=start_time%>/24*100%);width:calc(<%= elapsed_time %>/24*100%);'>
-                  <%= tr.created_at.hour.to_s+":"+tr.created_at.min.to_s %>
-                  <%= tr.time %>
+                <div class="box-each" style='margin-left:calc(<%=end_time-elapsed_time%>/24*100%);width:calc(<%= elapsed_time %>/24*100%);background-color:<%= tr.explanation %>;'>
+                  <% tr.created_at.hour.to_s+":"+tr.created_at.min.to_s %>
+                  <% tr.time %>
                   <% tr.created_at.hour.to_s+":"+tr.created_at.min.to_s+" "+elapsed_time.to_s %>
                 </div>
               <% end %>
