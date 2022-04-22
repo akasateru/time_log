@@ -10,7 +10,7 @@
     "glob-parent": "^6.0.2",
     "node-sass": "^7.0.1",
     "turbolinks": "^5.2.0",
-    "webpack": "^5.0.0"
+    "webpack": "^5.72.0"
   },
   "version": "0.1.0",
   "devDependencies": {
