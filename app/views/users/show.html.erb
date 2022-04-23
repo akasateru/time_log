@@ -21,17 +21,21 @@
             <% 25.times do |n| %>
               <div class="border" style='margin-left:calc(<%=n%>/24*100%);'></div>
             <% end %>
-            <% @time_records.each do |tr| %>
-              <% if tr.created_at.year==date.year and tr.created_at.month==date.month and tr.created_at.day==date.day %>
-                <% end_time = tr.created_at.hour + tr.created_at.min.to_f/60 %>
-                <% k = tr.time.split(":") %>
-                <% elapsed_time = k[0].to_i+k[1].to_f/60+k[2].to_f/3600 %>
-                <div class="box-each" style='margin-left:calc(<%=end_time-elapsed_time%>/24*100%);width:calc(<%= elapsed_time %>/24*100%);background-color:<%= tr.explanation %>;'>
-                  <% tr.created_at.hour.to_s+":"+tr.created_at.min.to_s %>
-                  <% tr.time %>
-                  <% tr.created_at.hour.to_s+":"+tr.created_at.min.to_s+" "+elapsed_time.to_s %>
-                </div>
+            <% if @time_records %>
+              <% @time_records.each do |tr| %>
+                <% if tr.created_at.year==date.year and tr.created_at.month==date.month and tr.created_at.day==date.day %>
+                  <% end_time = tr.created_at.hour + tr.created_at.min.to_f/60 %>
+                  <% k = tr.time.split(":") %>
+                  <% elapsed_time = k[0].to_i+k[1].to_f/60+k[2].to_f/3600 %>
+                  <div class="box-each" style='margin-left:calc(<%=end_time-elapsed_time%>/24*100%);width:calc(<%= elapsed_time %>/24*100%);background-color:<%= tr.explanation %>;'>
+                    <% tr.created_at.hour.to_s+":"+tr.created_at.min.to_s %>
+                    <% tr.time %>
+                    <% tr.created_at.hour.to_s+":"+tr.created_at.min.to_s+" "+elapsed_time.to_s %>
+                  </div>
+                <% end %>
               <% end %>
+            <% else %>
+               <div>記録がありません。</div>
             <% end %>
           </div>
         </div>
